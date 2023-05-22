@@ -10,7 +10,11 @@ public class PullController : MonoBehaviour
 
     [SerializeField]
     GameObject sweetSpot;
-    RectTransform sweetSpotRectTransform;
+    RectTransform sweetSpotRectTransform;    
+    
+    [SerializeField]
+    GameObject bitterSpot;
+    RectTransform bitterSpotRectTransform;
 
 
     [SerializeField]
@@ -28,6 +32,7 @@ public class PullController : MonoBehaviour
 
 
     private float sweetSpotXScale;
+    private float bitterSpotXScale;
     private float indicatorXScale;
 
     private bool leftToRight = true;
@@ -36,6 +41,7 @@ public class PullController : MonoBehaviour
     private Vector3 indicatorEndPos;
 
     public Vector2 sweetSpotRange;
+    public Vector2 bitterSpotRange;
 
 
 
@@ -44,16 +50,19 @@ public class PullController : MonoBehaviour
         indicatorRectTransform = indicator.GetComponent<RectTransform>();
         sweetSpotRectTransform = sweetSpot.GetComponent<RectTransform>();
         backgroundRectTransform = background.GetComponent<RectTransform>();
+        bitterSpotRectTransform = bitterSpot.GetComponent<RectTransform>();
 
         indicatorStartingPos = new Vector3(-maximumValueXAxis, 0, 0);
         indicatorEndPos = new Vector3(maximumValueXAxis, 0, 0);
+
         indicatorXScale = indicatorRectTransform.localScale.x;
         sweetSpotXScale = sweetSpotRectTransform.localScale.x;
+        bitterSpotXScale = bitterSpotRectTransform.localScale.x;
     }
 
     private void Start()
     {
-        UpdateSweetSpotPosition();
+        UpdateSweetAndBitterSpotPosition();
     }
 
     private void Update()
@@ -76,20 +85,32 @@ public class PullController : MonoBehaviour
 
     }
 
-    private void UpdateSweetSpotPosition()
+    private void UpdateSweetAndBitterSpotPosition()
     {
         sweetSpotRectTransform.localPosition = new Vector3(Random.Range(-sweetSpotMaxPosition, sweetSpotMaxPosition), 0, 0);
+        bitterSpotRectTransform.localPosition = sweetSpotRectTransform.localPosition;
         sweetSpotRange = new Vector2(
             (sweetSpotRectTransform.localPosition.x - (sweetSpotXScale * backgroundRectTransform.rect.width)/2), 
             (sweetSpotRectTransform.localPosition.x + (sweetSpotXScale * backgroundRectTransform.rect.width)/2)
             );
+
+        bitterSpotRange = new Vector2(
+            (bitterSpotRectTransform.localPosition.x - (bitterSpotXScale * backgroundRectTransform.rect.width)/2),
+            (bitterSpotRectTransform.localPosition.x + (bitterSpotXScale * backgroundRectTransform.rect.width)/2)
+            );
+        
     }
 
     private void CheckIfIndicatorIsInContactWithSweetSpot()
     {
-        if (indicatorRectTransform.localPosition.x >= sweetSpotRange.x && indicatorRectTransform.localPosition.x <= sweetSpotRange.y)
+        if (indicatorRectTransform.localPosition.x >= sweetSpotRange.x && indicatorRectTransform.localPosition.x <= sweetSpotRange.y) // if sweet spot is hit
         {
-            UpdateSweetSpotPosition();
+            UpdateSweetAndBitterSpotPosition();
+        }
+
+        else if(indicatorRectTransform.localPosition.x >= bitterSpotRange.x && indicatorRectTransform.localPosition.x <= bitterSpotRange.y)
+        {
+            Debug.Log("Bitter!");
         }
         else
         {
