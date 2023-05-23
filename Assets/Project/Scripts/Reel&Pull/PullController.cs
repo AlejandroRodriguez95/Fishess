@@ -28,13 +28,7 @@ public class PullController : MonoBehaviour
     private float sweetSpotMaxPosition;
 
     [SerializeField]
-    private float lerpSpeed = 50;
-
-
-    private float sweetSpotXScale;
-    private float bitterSpotXScale;
-    private float indicatorXScale;
-
+    private float lerpSpeed = 250;
     private bool leftToRight = true;
 
     private Vector3 indicatorStartingPos;
@@ -43,7 +37,7 @@ public class PullController : MonoBehaviour
     public Vector2 sweetSpotRange;
     public Vector2 bitterSpotRange;
 
-
+    private Vector2 sweetSpotMinAndMaxSize;
 
     private void Awake()
     {
@@ -54,15 +48,12 @@ public class PullController : MonoBehaviour
 
         indicatorStartingPos = new Vector3(-maximumValueXAxis, 0, 0);
         indicatorEndPos = new Vector3(maximumValueXAxis, 0, 0);
-
-        indicatorXScale = indicatorRectTransform.localScale.x;
-        sweetSpotXScale = sweetSpotRectTransform.localScale.x;
-        bitterSpotXScale = bitterSpotRectTransform.localScale.x;
+        sweetSpotMinAndMaxSize = new Vector2(10, 30);
     }
 
     private void Start()
     {
-        UpdateSweetAndBitterSpotPosition();
+        UpdateSweetAndBitterSpotPositionAndSize();
     }
 
     private void Update()
@@ -85,18 +76,24 @@ public class PullController : MonoBehaviour
 
     }
 
-    private void UpdateSweetAndBitterSpotPosition()
+    private void UpdateSweetAndBitterSpotPositionAndSize()
     {
+        sweetSpotRectTransform.sizeDelta = new Vector2((int)Random.Range(sweetSpotMinAndMaxSize.x, sweetSpotMinAndMaxSize.y), sweetSpotRectTransform.sizeDelta.y);
         sweetSpotRectTransform.localPosition = new Vector3(Random.Range(-sweetSpotMaxPosition, sweetSpotMaxPosition), 0, 0);
+        bitterSpotRectTransform.sizeDelta = new Vector2(sweetSpotRectTransform.sizeDelta.x + 8, 90);
+
+        sweetSpotMaxPosition = backgroundRectTransform.sizeDelta.x/2 - bitterSpotRectTransform.sizeDelta.x;
         bitterSpotRectTransform.localPosition = sweetSpotRectTransform.localPosition;
+
+
         sweetSpotRange = new Vector2(
-            (sweetSpotRectTransform.localPosition.x - (sweetSpotXScale * backgroundRectTransform.rect.width)/2), 
-            (sweetSpotRectTransform.localPosition.x + (sweetSpotXScale * backgroundRectTransform.rect.width)/2)
+            (sweetSpotRectTransform.localPosition.x - sweetSpotRectTransform.rect.width/2), 
+            (sweetSpotRectTransform.localPosition.x + sweetSpotRectTransform.rect.width / 2)
             );
 
         bitterSpotRange = new Vector2(
-            (bitterSpotRectTransform.localPosition.x - (bitterSpotXScale * backgroundRectTransform.rect.width)/2),
-            (bitterSpotRectTransform.localPosition.x + (bitterSpotXScale * backgroundRectTransform.rect.width)/2)
+            (bitterSpotRectTransform.localPosition.x - bitterSpotRectTransform.rect.width/2),
+            (bitterSpotRectTransform.localPosition.x + bitterSpotRectTransform.rect.width / 2 )
             );
         
     }
@@ -105,7 +102,7 @@ public class PullController : MonoBehaviour
     {
         if (indicatorRectTransform.localPosition.x >= sweetSpotRange.x && indicatorRectTransform.localPosition.x <= sweetSpotRange.y) // if sweet spot is hit
         {
-            UpdateSweetAndBitterSpotPosition();
+            UpdateSweetAndBitterSpotPositionAndSize();
         }
 
         else if(indicatorRectTransform.localPosition.x >= bitterSpotRange.x && indicatorRectTransform.localPosition.x <= bitterSpotRange.y)
