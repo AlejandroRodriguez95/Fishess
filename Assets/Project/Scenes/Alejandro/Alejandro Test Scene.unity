@@ -517,11 +517,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishCollection:
+  - {fileID: 11400000, guid: ee55b5911773a6846aae9d7f31af05b0, type: 2}
   - {fileID: 11400000, guid: de3d30e5686c99a4ebbc13ea7998ddae, type: 2}
-  - {fileID: 11400000, guid: 82e51db179c8c12419ddc373c494314b, type: 2}
   - {fileID: 11400000, guid: 3929cff9f177a164796906fece491d56, type: 2}
+  - {fileID: 11400000, guid: 82e51db179c8c12419ddc373c494314b, type: 2}
   fishJournalInUI: {fileID: 2103377244}
+  fishImageDisplay: {fileID: 1975735821}
+  fishNameDisplay: {fileID: 871402702}
+  fishDescDisplay: {fileID: 837834369}
+  fishInfoDisplay: {fileID: 1897288838}
   horizontalLayoutGroupPrefab: {fileID: 7936883700696228905, guid: 53d01ea118f4878428d1b397195d85ba, type: 3}
+  mysteryFishSprite: {fileID: 21300000, guid: 954e40d46028507438c3b6131fd0ea2c, type: 3}
 --- !u!4 &756704247
 Transform:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TestFish1
   m_EditorClassIdentifier: 
   fishName: testFish
-  fishDescription: this fish has not properly been tested, so it's taste might not
-    be as you expect it
-  fishLore: A new type of fish that was first found in a test folder
+  fishId: 0
+  fishDescription: this fish has not properly been tested, so its might not taste
+    as you expect it
+  fishLore: A new type of fish that was first discovered in a test folder
   fishImage: {fileID: 21300000, guid: 4fba2d3ce0ec784438e9da7497e6cd40, type: 3}

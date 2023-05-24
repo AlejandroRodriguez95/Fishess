@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TestFish4
   m_EditorClassIdentifier: 
   fishName: 
-  fishId: 0
-  fishDescription: 
+  fishId: 4
+  fishDescription: this fish has not properly been tested, so its might not taste
+    as you expect it
   fishLore: 
   fishImage: {fileID: 0}
