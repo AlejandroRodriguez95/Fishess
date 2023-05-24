@@ -362,7 +362,7 @@ RectTransform:
   - {fileID: 1137255695}
   - {fileID: 261737516}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -487,6 +487,63 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1001 &672021512
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5496282600443924484, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_Name
+      value: Reel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.037323
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.43235052
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496282600443924487, guid: a96884e261ceff249aad4d727f881691, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a96884e261ceff249aad4d727f881691, type: 3}
 --- !u!1 &756704245
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,13 +578,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: de3d30e5686c99a4ebbc13ea7998ddae, type: 2}
   - {fileID: 11400000, guid: 3929cff9f177a164796906fece491d56, type: 2}
   - {fileID: 11400000, guid: 82e51db179c8c12419ddc373c494314b, type: 2}
-  fishJournalInUI: {fileID: 2103377244}
-  fishImageDisplay: {fileID: 1975735821}
-  fishNameDisplay: {fileID: 871402702}
-  fishDescDisplay: {fileID: 837834369}
-  fishInfoDisplay: {fileID: 1897288838}
-  horizontalLayoutGroupPrefab: {fileID: 7936883700696228905, guid: 53d01ea118f4878428d1b397195d85ba, type: 3}
-  mysteryFishSprite: {fileID: 21300000, guid: 954e40d46028507438c3b6131fd0ea2c, type: 3}
+  uiManager: {fileID: 1935716310}
 --- !u!4 &756704247
 Transform:
   m_ObjectHideFlags: 0
@@ -541,7 +592,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &837834367
 GameObject:
@@ -1153,7 +1204,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1826269305
 GameObject:
@@ -1441,6 +1492,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1935716309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1935716311}
+  - component: {fileID: 1935716310}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1935716310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935716309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d060d3d2d9daf674590a2bbaa97987f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishJournalInUI: {fileID: 2103377244}
+  fishImageDisplay: {fileID: 1975735821}
+  fishNameDisplay: {fileID: 871402702}
+  fishDescDisplay: {fileID: 837834369}
+  fishInfoDisplay: {fileID: 1897288838}
+  horizontalLayoutGroupPrefab: {fileID: 7936883700696228905, guid: 53d01ea118f4878428d1b397195d85ba, type: 3}
+  mysteryFishSprite: {fileID: 21300000, guid: 954e40d46028507438c3b6131fd0ea2c, type: 3}
+--- !u!4 &1935716311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935716309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1975735819
 GameObject:
   m_ObjectHideFlags: 0
