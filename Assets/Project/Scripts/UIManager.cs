@@ -23,12 +23,35 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI fishInfoDisplay;
 
+    [Header("Journal + selected fish info")]
+    [SerializeField]
+    RectTransform journal;
+    [SerializeField]
+    RectTransform fishInfo;
+    [SerializeField]
+    GameObject ToggleOnButton;
+    [SerializeField]
+    GameObject ToggleOffButton;
+    
+
     [SerializeField]
     GameObject horizontalLayoutGroupPrefab;
     [SerializeField]
     Sprite mysteryFishSprite;
 
     List<Transform> imageList;
+
+    #region ToggleJournalVariables
+
+    Vector2 journalDisplayPos = new Vector2(-210, 0);
+    Vector2 journalHiddenPos = new Vector2(200, 0);
+    Vector2 fishInfoDisplayPos = new Vector2(-10, 0);
+    Vector2 fishInfoHiddenPos = new Vector2(400, 0);
+    float elapsed = 0;
+    [SerializeField]
+    [Tooltip("How long in seconds it takes the journal to move to the new position")]
+    float duration = 1;
+    #endregion
 
     bool[] fishIsUnlocked;
 
@@ -70,6 +93,45 @@ public class UIManager : MonoBehaviour
             imageList[i].gameObject.SetActive(true);
         }
     }
+    #region Toggle journal on/off logic
+    public void ToggleJournalOn()
+    {
+        StartCoroutine(DisplayJournal());
+    }
+
+    IEnumerator DisplayJournal()
+    {
+        ToggleOnButton.SetActive(false);
+        while(journal.anchoredPosition.x != journalDisplayPos.x)
+        {
+            yield return new WaitForEndOfFrame();
+            journal.anchoredPosition = Vector2.Lerp(journalHiddenPos, journalDisplayPos, elapsed);
+            fishInfo.anchoredPosition = Vector2.Lerp(fishInfoHiddenPos, fishInfoDisplayPos, elapsed);
+            elapsed += Time.deltaTime/duration;
+
+        }
+        ToggleOffButton.SetActive(true);
+        elapsed = 0;
+    }    
+    public void ToggleJournalOff()
+    {
+        StartCoroutine(HideJournal());
+    }
+
+    IEnumerator HideJournal()
+    {
+        ToggleOffButton.SetActive(false);
+        while(journal.anchoredPosition.x != journalHiddenPos.x)
+        {
+            yield return new WaitForEndOfFrame();
+            journal.anchoredPosition = Vector2.Lerp(journalDisplayPos, journalHiddenPos, elapsed);
+            fishInfo.anchoredPosition = Vector2.Lerp(fishInfoDisplayPos, fishInfoHiddenPos, elapsed);
+            elapsed += Time.deltaTime/duration;
+        }
+        ToggleOnButton.SetActive(true);
+        elapsed = 0;
+    }
+    #endregion
 
     #region Unlocking Fishes
     public void UnlockFish(int fishId)
