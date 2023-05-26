@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9469ac4a196a1f1469d2cbfed1248463, type: 3}
+  m_Name: Double
+  m_EditorClassIdentifier: 
+  fishName: Doublefish
+  fishId: 1
+  fishDescription: big big big fat fish
+  fishLore: a fish that has a tasty look
+  fishImage: {fileID: 21300000, guid: 6478a0203bfbc3c4086e4661a93e5275, type: 3}
+  fishBitesBaitTime: {x: 4, y: 8}
+  fishMaxHealth: 1
+  fishMaxFails: 3
+  pullIndicatorSpeedRange: {x: 0, y: 0}
+  reelSpinsToCatch: {x: 0, y: 0}
+  reelFrictionRange: {x: 0, y: 0}

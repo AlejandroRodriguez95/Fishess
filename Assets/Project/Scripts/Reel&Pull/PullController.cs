@@ -98,21 +98,18 @@ public class PullController : MonoBehaviour
         
     }
 
-    private void CheckIfIndicatorIsInContactWithSweetSpot()
+    public PullResult CheckIfIndicatorIsInContactWithSweetSpot()
     {
         if (indicatorRectTransform.localPosition.x >= sweetSpotRange.x && indicatorRectTransform.localPosition.x <= sweetSpotRange.y) // if sweet spot is hit
         {
             UpdateSweetAndBitterSpotPositionAndSize();
+            return PullResult.Hit; // sweet spot
         }
 
-        else if(indicatorRectTransform.localPosition.x >= bitterSpotRange.x && indicatorRectTransform.localPosition.x <= bitterSpotRange.y)
-        {
-            Debug.Log("Bitter!");
-        }
+        else if (indicatorRectTransform.localPosition.x >= bitterSpotRange.x && indicatorRectTransform.localPosition.x <= bitterSpotRange.y)
+            return PullResult.Bitter; // bitter spot
         else
-        {
-            Debug.Log("Miss");
-        }
+            return PullResult.Miss; // miss
     }
 
 }
