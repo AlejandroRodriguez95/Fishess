@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,14 +18,21 @@ public class ReelController : MonoBehaviour
     [Range(0f, 10f)]
     private float friction = 2f;
 
+    public float Friction
+    {
+        get { return friction; }
+        set { friction = value; }
+    }
 
     private float previousRotation;
+    private bool isMouseDown = false;
+
+    public static event Action SpinCountUpdated;
 
     void Start()
     {
         previousRotation = reelRotator.transform.rotation.eulerAngles.z;
     }
-
 
     void Update()
     {
@@ -37,13 +45,29 @@ public class ReelController : MonoBehaviour
         float currentRotation = reelRotator.transform.rotation.eulerAngles.z;
         float targetRotationZ = targetRotation.eulerAngles.z;
 
-        if ((targetRotationZ - currentRotation + 360) % 360 <= 120)
+        if (Input.GetMouseButtonDown(0))
         {
-            reelRotator.transform.rotation = Quaternion.Lerp(reelRotator.transform.rotation, targetRotation, rotationSpeed/friction * Time.deltaTime);
+            isMouseDown = true;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isMouseDown = false;
+        }
+
+        if (isMouseDown)
+        {
+            if ((targetRotationZ - currentRotation + 360) % 360 <= 120)
+            {
+                reelRotator.transform.rotation = Quaternion.Lerp(reelRotator.transform.rotation, targetRotation, rotationSpeed / friction * Time.deltaTime);
+
+                // Check for a full rotation (360 degrees)
+                if (Mathf.Abs(currentRotation - previousRotation) > 300f)
+                {
+                    SpinCountUpdated?.Invoke();
+                }
+            }
+
+            previousRotation = currentRotation;
         }
     }
 }
-
-
-
-

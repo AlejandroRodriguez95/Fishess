@@ -21,7 +21,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     List<Fish> availableFishes;
     [SerializeField]
-    GameObject pullSystem;
+    GameObject pullSystem;    
+    [SerializeField]
+    GameObject reelSystem;
+    [SerializeField]
+    Image capturedFish;
 
     [Header("Script references")]
     [SerializeField]
@@ -29,7 +33,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     CharacterAnimationController characterAnimation;
     [SerializeField]
-    PullController pullController;
+    PullController pullController;    
+    [SerializeField]
+    ReelController reelController;
 
     //game loop variables: 
     [SerializeField]
@@ -39,8 +45,10 @@ public class GameManager : MonoBehaviour
     private Coroutine waitAndChangeStage;
     [SerializeField]
     Fish currentFish;
-    [SerializeField]
-    int currentFishHealth;
+    bool wasFishCaptured;
+    int reelSpins;
+    int reelSpinsToCatch;
+    int fishesCaptured;
     [SerializeField]
     int currentFishMisses;
 
@@ -48,10 +56,14 @@ public class GameManager : MonoBehaviour
     {
         uiManager.UIFishCollection = fishCollection;
         availableFishes = new List<Fish>(fishCollection);
+        fishesCaptured = 0;
 
         currentFish = availableFishes[Random.Range(0, availableFishes.Count)];
-        currentFishHealth = currentFish.FishMaxHealth;
         currentFishMisses = 0;
+        reelSpins = 0;
+        reelSpinsToCatch = Random.Range((int)currentFish.ReelSpinsToCatch.x,(int)currentFish.ReelSpinsToCatch.y);
+
+        ReelController.SpinCountUpdated += OnSpinCountUpdated;
 
         currentStage = GameStages.Idle;
     }
@@ -71,6 +83,11 @@ public class GameManager : MonoBehaviour
             //player can cast rod
             //  possible input -> space
             case GameStages.Idle:
+                if (fishesCaptured == 1)
+                    Fade.fadeSky.Invoke();
+
+                capturedFish.gameObject.SetActive(false);
+                capturedFish.sprite = null;
                 characterAnimation.UpdateAnimation(currentStage);
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
@@ -82,12 +99,15 @@ public class GameManager : MonoBehaviour
             case GameStages.CastingRod:
                 characterAnimation.UpdateAnimation(currentStage);
                 currentStage = GameStages.WaitingForFish;
+                uiManager.ToggleOffButton.GetComponent<Button>().onClick.Invoke();
+                uiManager.ToggleOnButton.SetActive(false);
+
                 break;
             case GameStages.WaitingForFish:
                 if(!waitingCoroutineIsActive)
                 {
                     float waitingTime = Random.Range(currentFish.FishBitesBaitTime.x, currentFish.FishBitesBaitTime.y);
-                    StartCoroutine(WaitForSecondsAndMoveToStage(waitingTime, GameStages.FishBitRod));
+                    StartCoroutine(WaitForSecondsAndMoveToStage(Random.Range(currentFish.FishBitesBaitTime.x, currentFish.FishBitesBaitTime.y), GameStages.FishBitRod));
                 }
                 break;
 
@@ -97,7 +117,9 @@ public class GameManager : MonoBehaviour
                 if (!waitingCoroutineIsActive)
                 {
                     characterAnimation.UpdateAnimation(currentStage);
-                    StartCoroutine(WaitForSecondsAndMoveToStage(Random.Range(2, 5), GameStages.Reel));
+
+                    StartCoroutine(WaitForSecondsAndMoveToStage(Random.Range(currentFish.FishBitesBaitTime.x, currentFish.FishBitesBaitTime.y), Random.Range(0, 2) == 0 ? GameStages.Reel : GameStages.Pull));
+
                 }
                 break;
             //player pulls for X amount of times, defined in the fish data
@@ -105,6 +127,8 @@ public class GameManager : MonoBehaviour
             case GameStages.Pull:
                 if (!waitingCoroutineIsActive)
                 {
+                    pullController.LerpSpeed = Random.Range(currentFish.PullIndicatorSpeedRange.x, currentFish.PullIndicatorSpeedRange.y);
+                    reelSystem.SetActive(false);
                     characterAnimation.UpdateAnimation(currentStage);
                     pullSystem.SetActive(true);
                     waitAndChangeStage = StartCoroutine(WaitForSecondsAndMoveToStage(10f, GameStages.Reel));
@@ -116,7 +140,7 @@ public class GameManager : MonoBehaviour
                     switch (result)
                     {
                         case PullResult.Hit:
-                            currentFishHealth--;
+                            reelSpins++;
                             break;
                         case PullResult.Miss:
                             currentFishMisses++;
@@ -129,18 +153,13 @@ public class GameManager : MonoBehaviour
                 if (DidFishEscape())
                 {
                     pullSystem.SetActive(false);
+                    reelSystem.SetActive(false);
                     StopCoroutine(waitAndChangeStage);
                     waitingCoroutineIsActive = false;
                     currentStage = GameStages.FishRanAway;
                 }
 
-                if (WasFishCaptured())
-                {
-                    pullSystem.SetActive(false);
-                    StopCoroutine(waitAndChangeStage);
-                    waitingCoroutineIsActive = false;
-                    currentStage = GameStages.FishCaught;
-                }
+
                 break;
 
             //player reels until he reaches the necessary amount of spins around the reel.
@@ -150,9 +169,20 @@ public class GameManager : MonoBehaviour
             case GameStages.Reel:
                 if (!waitingCoroutineIsActive)
                 {
+                    reelController.Friction = Random.Range(currentFish.ReelFrictionRange.x, currentFish.ReelFrictionRange.y);
+                    reelSystem.SetActive(true);
                     characterAnimation.UpdateAnimation(currentStage);
                     pullSystem.SetActive(false);
-                    waitAndChangeStage = StartCoroutine(WaitForSecondsAndMoveToStage(3f, GameStages.Pull));
+                    waitAndChangeStage = StartCoroutine(WaitForSecondsAndMoveToStage(10f, GameStages.Pull));
+                }
+                if (wasFishCaptured)
+                {
+                    pullSystem.SetActive(false);
+                    reelSystem.SetActive(false);
+                    uiManager.ToggleOnButton.GetComponent<Button>().onClick.Invoke();
+                    StopCoroutine(waitAndChangeStage);
+                    waitingCoroutineIsActive = false;
+                    currentStage = GameStages.FishCaught;
                 }
                 break;
 
@@ -162,11 +192,17 @@ public class GameManager : MonoBehaviour
             case GameStages.FishCaught:
                 if (!waitingCoroutineIsActive)
                 {
+                    capturedFish.sprite = currentFish.FishImage;
+                    capturedFish.gameObject.SetActive(true);
+
                     characterAnimation.UpdateAnimation(currentStage);
                     uiManager.UnlockFish(currentFish.FishId);
                     availableFishes.Remove(currentFish);
+
+                    fishesCaptured++;
+
                     ResetCurrentFish();
-                    StartCoroutine(WaitForSecondsAndMoveToStage(5f, GameStages.Idle));
+                    StartCoroutine(WaitForSecondsAndMoveToStage(8f, GameStages.Idle));
                 }
 
                 break;
@@ -174,6 +210,7 @@ public class GameManager : MonoBehaviour
             case GameStages.FishRanAway:
                 if (!waitingCoroutineIsActive)
                 {
+                    uiManager.ToggleOnButton.SetActive(true);
                     characterAnimation.UpdateAnimation(currentStage);
                     ResetCurrentFish();
                     StartCoroutine(WaitForSecondsAndMoveToStage(5f, GameStages.Idle));
@@ -198,25 +235,25 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    private bool WasFishCaptured()
-    {
-        if (currentFishHealth <= 0)
-            return true;
-        
-        return false;
-    }
-
     private void ResetCurrentFish()
     {
         currentFish = availableFishes[Random.Range(0, availableFishes.Count)];
-        currentFishHealth = currentFish.FishMaxHealth;
         currentFishMisses = 0;
+        reelSpins = 0;
+        wasFishCaptured = false;
     }
 
     private void UpdateStage(GameStages newStage)
     {
         currentStage = newStage;
         characterAnimation.UpdateAnimation(currentStage);
+    }
+    void OnSpinCountUpdated()
+    {
+        reelSpins++;
+        if (reelSpins >= currentFish.FishMaxHealth) // was fish captured?
+            wasFishCaptured = true;
+
     }
 
 }

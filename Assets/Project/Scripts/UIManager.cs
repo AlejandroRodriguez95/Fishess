@@ -29,9 +29,19 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     RectTransform fishInfo;
     [SerializeField]
-    GameObject ToggleOnButton;
+    GameObject toggleOnButton;
+    public GameObject ToggleOnButton
+    {
+        get { return toggleOnButton; }
+    }
     [SerializeField]
-    GameObject ToggleOffButton;
+    GameObject toggleOffButton;
+
+    public GameObject ToggleOffButton
+    {
+        get { return toggleOffButton; }
+    }
+
     
 
     [SerializeField]
@@ -110,7 +120,7 @@ public class UIManager : MonoBehaviour
             elapsed += Time.deltaTime/duration;
 
         }
-        ToggleOffButton.SetActive(true);
+        toggleOffButton.SetActive(true);
         elapsed = 0;
     }    
     public void ToggleJournalOff()
@@ -120,7 +130,7 @@ public class UIManager : MonoBehaviour
 
     IEnumerator HideJournal()
     {
-        ToggleOffButton.SetActive(false);
+        toggleOffButton.SetActive(false);
         while(journal.anchoredPosition.x != journalHiddenPos.x)
         {
             yield return new WaitForEndOfFrame();

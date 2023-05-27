@@ -20,6 +20,6 @@ MonoBehaviour:
   fishBitesBaitTime: {x: 3, y: 8}
   fishMaxHealth: 1
   fishMaxFails: 3
-  pullIndicatorSpeedRange: {x: 0, y: 0}
-  reelSpinsToCatch: {x: 0, y: 0}
-  reelFrictionRange: {x: 0, y: 0}
+  pullIndicatorSpeedRange: {x: 100, y: 200}
+  reelSpinsToCatch: {x: 5, y: 10}
+  reelFrictionRange: {x: 1, y: 4}

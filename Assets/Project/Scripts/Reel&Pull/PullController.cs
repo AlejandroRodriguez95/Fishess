@@ -29,6 +29,12 @@ public class PullController : MonoBehaviour
 
     [SerializeField]
     private float lerpSpeed = 250;
+    public float LerpSpeed
+    {
+        get { return lerpSpeed; }
+        set { lerpSpeed = value; }
+    }
+
     private bool leftToRight = true;
 
     private Vector3 indicatorStartingPos;

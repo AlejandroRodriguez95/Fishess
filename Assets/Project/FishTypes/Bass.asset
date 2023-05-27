@@ -19,8 +19,8 @@ MonoBehaviour:
   fishLore: A new type of fish that was first discovered in a test folder
   fishImage: {fileID: 21300000, guid: f4211508cbb628441ab974acd6211882, type: 3}
   fishBitesBaitTime: {x: 4, y: 6}
-  fishMaxHealth: 1
+  fishMaxHealth: 15
   fishMaxFails: 3
-  pullIndicatorSpeedRange: {x: 0, y: 0}
-  reelSpinsToCatch: {x: 0, y: 0}
-  reelFrictionRange: {x: 0, y: 0}
+  pullIndicatorSpeedRange: {x: 250, y: 300}
+  reelSpinsToCatch: {x: 5, y: 8}
+  reelFrictionRange: {x: 0, y: 2}
