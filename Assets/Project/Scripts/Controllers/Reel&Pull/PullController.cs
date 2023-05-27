@@ -60,7 +60,6 @@ public class PullController : MonoBehaviour
 
         indicatorStartingPos = new Vector3(-maximumValueXAxis, 0, 0);
         indicatorEndPos = new Vector3(maximumValueXAxis, 0, 0);
-        sweetSpotMinAndMaxSize = new Vector2(10, 30);
     }
 
     private void Start()
@@ -94,7 +93,8 @@ public class PullController : MonoBehaviour
         sweetSpotRectTransform.localPosition = new Vector3(Random.Range(-sweetSpotMaxPosition, sweetSpotMaxPosition), 0, 0);
         bitterSpotRectTransform.sizeDelta = new Vector2(sweetSpotRectTransform.sizeDelta.x * 2f, sweetSpotRectTransform.sizeDelta.y);
 
-        sweetSpotMaxPosition = backgroundRectTransform.sizeDelta.x/2 - bitterSpotRectTransform.sizeDelta.x;
+        sweetSpotMaxPosition = backgroundRectTransform.sizeDelta.x/2 - bitterSpotRectTransform.sizeDelta.x/2 - 18;
+
         bitterSpotRectTransform.localPosition = sweetSpotRectTransform.localPosition;
 
 

@@ -64,7 +64,6 @@ public class ReelController : MonoBehaviour
                 reelRotator.transform.rotation = Quaternion.Lerp(reelRotator.transform.rotation, targetRotation, rotationSpeed / friction * Time.deltaTime);
                 handle.transform.localRotation = Quaternion.Inverse(reelRotator.transform.rotation);
 
-                // Check for a full rotation (360 degrees)
                 if (Mathf.Abs(currentRotation - previousRotation) > 300f)
                 {
                     SpinCountUpdated?.Invoke();
@@ -73,5 +72,11 @@ public class ReelController : MonoBehaviour
 
             previousRotation = currentRotation;
         }
+    }
+
+
+    private void OnDisable()
+    {
+        isMouseDown = false;
     }
 }
