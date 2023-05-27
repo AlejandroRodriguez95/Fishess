@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
     bool wasFishCaptured;
     int reelSpins;
     int reelSpinsToCatch;
+    [SerializeField]
     int pullCount;
     int fishesCaptured;
     [SerializeField]
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour
             case GameStages.Pull:
                 if (!waitingCoroutineIsActive)
                 {
+                    pullCount = 0;
                     audioManager.StopAudio();
                     audioManager.PlayAudioLoop(audioClips[5]);
 
