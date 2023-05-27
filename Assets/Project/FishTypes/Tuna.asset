@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tuna
   m_EditorClassIdentifier: 
   fishName: Tuna fish
-  fishId: 6
+  fishId: 0
   fishDescription: this fish has not properly been tested, so its might not taste
     as you expect it
   fishLore: plx mix me with mayo
@@ -24,4 +24,4 @@ MonoBehaviour:
   pullIndicatorSpeedRange: {x: 200, y: 250}
   reelSpinsToCatch: {x: 10, y: 11}
   reelFrictionRange: {x: 3, y: 10}
-  sweetSpotSizeRange: {x: 30, y: 50}
+  sweetSpotSizeRange: {x: 60, y: 80}

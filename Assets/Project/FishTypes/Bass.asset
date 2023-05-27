@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bass
   m_EditorClassIdentifier: 
   fishName: Bass fish
-  fishId: 0
+  fishId: 1
   fishDescription: this fish has not properly been tested, so its might not taste
     as you expect it
   fishLore: A new type of fish that was first discovered in a test folder
@@ -24,4 +24,4 @@ MonoBehaviour:
   pullIndicatorSpeedRange: {x: 250, y: 300}
   reelSpinsToCatch: {x: 5, y: 8}
   reelFrictionRange: {x: 0, y: 2}
-  sweetSpotSizeRange: {x: 30, y: 50}
+  sweetSpotSizeRange: {x: 50, y: 80}

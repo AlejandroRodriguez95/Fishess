@@ -23,4 +23,4 @@ MonoBehaviour:
   pullIndicatorSpeedRange: {x: 350, y: 400}
   reelSpinsToCatch: {x: 15, y: 20}
   reelFrictionRange: {x: 3, y: 5}
-  sweetSpotSizeRange: {x: 30, y: 50}
+  sweetSpotSizeRange: {x: 60, y: 80}

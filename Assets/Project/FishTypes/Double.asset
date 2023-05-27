@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Double
   m_EditorClassIdentifier: 
   fishName: Doublefish
-  fishId: 1
+  fishId: 3
   fishDescription: big big big fat fish
   fishLore: a fish that has a tasty look
   fishImage: {fileID: 21300000, guid: 6478a0203bfbc3c4086e4661a93e5275, type: 3}
@@ -23,4 +23,4 @@ MonoBehaviour:
   pullIndicatorSpeedRange: {x: 50, y: 100}
   reelSpinsToCatch: {x: 5, y: 10}
   reelFrictionRange: {x: 1, y: 3}
-  sweetSpotSizeRange: {x: 30, y: 50}
+  sweetSpotSizeRange: {x: 60, y: 80}
