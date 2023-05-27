@@ -17,9 +17,10 @@ MonoBehaviour:
   fishDescription: the pinacle of evolution. A fish that humans won't consume
   fishLore: it's closely related to the hollow fish
   fishImage: {fileID: 21300000, guid: ce5c7089d126b9549a520b01ae627af0, type: 3}
-  fishBitesBaitTime: {x: 3, y: 6}
+  fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 1
   fishMaxFails: 5
   pullIndicatorSpeedRange: {x: 350, y: 600}
   reelSpinsToCatch: {x: 3, y: 8}
   reelFrictionRange: {x: 0, y: 2}
+  sweetSpotSizeRange: {x: 30, y: 50}

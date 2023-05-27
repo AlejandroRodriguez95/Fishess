@@ -36,7 +36,9 @@ public class Fish : ScriptableObject
     [SerializeField]
     Vector2 reelSpinsToCatch;
     [SerializeField]
-    Vector2 reelFrictionRange;
+    Vector2 reelFrictionRange;    
+    [SerializeField]
+    Vector2 sweetSpotSizeRange;
 
 
     public string FishName { get { return fishName; } }
@@ -50,5 +52,6 @@ public class Fish : ScriptableObject
     public Vector2 PullIndicatorSpeedRange { get { return pullIndicatorSpeedRange; } }
     public Vector2 ReelSpinsToCatch { get { return reelSpinsToCatch; } }
     public Vector2 ReelFrictionRange { get { return reelFrictionRange; } }
+    public Vector2 SweetSpotSizeRange { get { return sweetSpotSizeRange; } }
 
 }

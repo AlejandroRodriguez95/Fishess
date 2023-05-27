@@ -17,9 +17,10 @@ MonoBehaviour:
   fishDescription: big big big fat fish
   fishLore: a fish that has a tasty look
   fishImage: {fileID: 21300000, guid: 6478a0203bfbc3c4086e4661a93e5275, type: 3}
-  fishBitesBaitTime: {x: 4, y: 8}
+  fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 1
   fishMaxFails: 2
   pullIndicatorSpeedRange: {x: 50, y: 100}
   reelSpinsToCatch: {x: 5, y: 10}
   reelFrictionRange: {x: 1, y: 3}
+  sweetSpotSizeRange: {x: 30, y: 50}

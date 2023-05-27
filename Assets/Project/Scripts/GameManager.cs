@@ -88,9 +88,12 @@ public class GameManager : MonoBehaviour
 
                 capturedFish.gameObject.SetActive(false);
                 capturedFish.sprite = null;
+                reelSpinsToCatch = Random.Range((int)currentFish.ReelSpinsToCatch.x, (int)currentFish.ReelSpinsToCatch.y);
+
                 characterAnimation.UpdateAnimation(currentStage);
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
+                    pullController.SweetSpotMinAndMaxSize = new Vector2(currentFish.SweetSpotSizeRange.x, currentFish.SweetSpotSizeRange.y);
                     currentStage = GameStages.CastingRod;
                 }
                 break;
@@ -251,7 +254,7 @@ public class GameManager : MonoBehaviour
     void OnSpinCountUpdated()
     {
         reelSpins++;
-        if (reelSpins >= currentFish.FishMaxHealth) // was fish captured?
+        if (reelSpins >= reelSpinsToCatch) // was fish captured?
             wasFishCaptured = true;
 
     }

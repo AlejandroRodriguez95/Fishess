@@ -17,9 +17,10 @@ MonoBehaviour:
   fishDescription: an emotionally drained fish
   fishLore: society made him what he is
   fishImage: {fileID: 21300000, guid: 43b303f4c21b56a43b9108d511667a62, type: 3}
-  fishBitesBaitTime: {x: 5, y: 11}
+  fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 1
   fishMaxFails: 5
   pullIndicatorSpeedRange: {x: 200, y: 250}
   reelSpinsToCatch: {x: 5, y: 8}
   reelFrictionRange: {x: 0, y: 2}
+  sweetSpotSizeRange: {x: 30, y: 50}
