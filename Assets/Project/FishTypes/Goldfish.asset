@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9469ac4a196a1f1469d2cbfed1248463, type: 3}
   m_Name: Goldfish
   m_EditorClassIdentifier: 
-  fishName: Goldfish
+  fishName: Enlarged Goldfish
   fishId: 2
-  fishDescription: surprisingly, it's not made of gold
-  fishLore: whoknows
+  fishDescription: Is this... a goldfish? How did it end up here... How is it thriving
+    in seawater?
+  fishLore: Goldfish are adaptable creatures, thriving in different water environments.
+    They can survive in freshwater and brackish water, making them versatile swimmers.
   fishImage: {fileID: 21300000, guid: 54ffe2e642a718c41822db5d238df7f3, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 5

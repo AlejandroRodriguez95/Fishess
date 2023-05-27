@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9469ac4a196a1f1469d2cbfed1248463, type: 3}
   m_Name: Bass
   m_EditorClassIdentifier: 
-  fishName: Bass fish
+  fishName: Striped Bass
   fishId: 1
-  fishDescription: this fish has not properly been tested, so its might not taste
-    as you expect it
-  fishLore: A new type of fish that was first discovered in a test folder
+  fishDescription: Such beautiful stripes! Can't wait to take this back home.
+  fishLore: Striped Bass travel long distances to spawn in freshwater rivers and
+    streams, and then returning to the ocean. This unique behavior contributes to
+    their widespread distribution and popularity among anglers.
   fishImage: {fileID: 21300000, guid: f4211508cbb628441ab974acd6211882, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 15

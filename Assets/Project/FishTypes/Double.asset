@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9469ac4a196a1f1469d2cbfed1248463, type: 3}
   m_Name: Double
   m_EditorClassIdentifier: 
-  fishName: Doublefish
+  fishName: Two-headed Fish
   fishId: 3
-  fishDescription: big big big fat fish
-  fishLore: a fish that has a tasty look
+  fishDescription: Oh god. How is this possible?
+  fishLore: An unidentified fish with two heads. One of them seems to have been long
+    gone already, while the other is flopping around.
   fishImage: {fileID: 21300000, guid: 6478a0203bfbc3c4086e4661a93e5275, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 1

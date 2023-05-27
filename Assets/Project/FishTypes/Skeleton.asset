@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9469ac4a196a1f1469d2cbfed1248463, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
-  fishName: Skeleton fish
+  fishName: Skeletal Fish
   fishId: 6
-  fishDescription: the pinacle of evolution. A fish that humans won't consume
-  fishLore: it's closely related to the hollow fish
+  fishDescription: It's... alive... Something is really wrong here.
+  fishLore: A fish with it's skeleton cleanly exposed. It rattles around your boat,
+    trying to find its way back to the ocean.
   fishImage: {fileID: 21300000, guid: ce5c7089d126b9549a520b01ae627af0, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 1

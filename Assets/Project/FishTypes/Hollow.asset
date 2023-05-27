@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9469ac4a196a1f1469d2cbfed1248463, type: 3}
   m_Name: Hollow
   m_EditorClassIdentifier: 
-  fishName: Hollow fish
+  fishName: Hollowed Fish
   fishId: 4
-  fishDescription: an emotionally drained fish
-  fishLore: society made him what he is
+  fishDescription: I almost dropped my rod in shock  as I reeled this thing onto
+    my boat. The empty eye sockets, and its wide open mouth made my skin crawl. What
+    the hell is happening here?
+  fishLore: A pale and boney fish, almost as if it had its life sucked out of it.
   fishImage: {fileID: 21300000, guid: 43b303f4c21b56a43b9108d511667a62, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 1

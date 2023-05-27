@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9469ac4a196a1f1469d2cbfed1248463, type: 3}
   m_Name: Tongue
   m_EditorClassIdentifier: 
-  fishName: Tongue fish
+  fishName: Tongue Fish
   fishId: 5
-  fishDescription: This fish will never confess
-  fishLore: the ladies' favorite
+  fishDescription: This isn't right... This tongue... its almost like it came from
+    a frog.
+  fishLore: A fish with an elongated tongue. It appears to have tangled itself with
+    its own tongue
   fishImage: {fileID: 21300000, guid: fe6ab0e3e89e0fd4583a1ced73a4b8a3, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 1
