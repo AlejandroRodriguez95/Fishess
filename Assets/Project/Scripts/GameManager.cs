@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
             //  possible input -> space
             case GameStages.Idle:
 
-
+                pullCount = 0;
                 capturedFish.gameObject.SetActive(false);
                 capturedFish.sprite = null;
                 reelSpinsToCatch = Random.Range((int)currentFish.ReelSpinsToCatch.x, (int)currentFish.ReelSpinsToCatch.y);
