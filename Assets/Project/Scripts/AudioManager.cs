@@ -70,4 +70,11 @@ public class AudioManager : MonoBehaviour
         hitAndPullAudioSource.clip = clip;
         hitAndPullAudioSource.Play();
     }
+
+    public void SwitchToCreepy(AudioClip clip)
+    {
+        ambientSoundAudioSource.Stop();
+        ambientSoundAudioSource.clip = clip;
+        ambientSoundAudioSource.Play();
+    }
 }

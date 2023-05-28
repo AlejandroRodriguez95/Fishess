@@ -284,7 +284,10 @@ public class GameManager : MonoBehaviour
                     if (fishesCaptured >= 4)
                     {
                         if (fishesCaptured == 4)
+                        {
                             Fade.fadeSky.Invoke();
+                            audioManager.SwitchToCreepy(audioClips[11]);
+                        }
 
                         random = 10;
                     }
