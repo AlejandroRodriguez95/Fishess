@@ -10,8 +10,8 @@ public class PullController : MonoBehaviour
 
     [SerializeField]
     GameObject sweetSpot;
-    RectTransform sweetSpotRectTransform;    
-    
+    RectTransform sweetSpotRectTransform;
+
     [SerializeField]
     GameObject bitterSpot;
     RectTransform bitterSpotRectTransform;
@@ -70,11 +70,11 @@ public class PullController : MonoBehaviour
     private void Update()
     {
         if (leftToRight)
-            indicatorRectTransform.localPosition = new Vector3(indicatorRectTransform.localPosition.x + lerpSpeed * Time.deltaTime , 0, 0);
+            indicatorRectTransform.localPosition = new Vector3(indicatorRectTransform.localPosition.x + lerpSpeed * Time.deltaTime, 0, 0);
         else
             indicatorRectTransform.localPosition = new Vector3(indicatorRectTransform.localPosition.x - lerpSpeed * Time.deltaTime, 0, 0);
 
-        if(indicatorRectTransform.localPosition.x >= indicatorEndPos.x)
+        if (indicatorRectTransform.localPosition.x >= indicatorEndPos.x)
             leftToRight = false;
 
         if (indicatorRectTransform.localPosition.x <= indicatorStartingPos.x)
@@ -93,21 +93,21 @@ public class PullController : MonoBehaviour
         sweetSpotRectTransform.localPosition = new Vector3(Random.Range(-sweetSpotMaxPosition, sweetSpotMaxPosition), 0, 0);
         bitterSpotRectTransform.sizeDelta = new Vector2(sweetSpotRectTransform.sizeDelta.x * 2f, sweetSpotRectTransform.sizeDelta.y);
 
-        sweetSpotMaxPosition = backgroundRectTransform.sizeDelta.x/2 - bitterSpotRectTransform.sizeDelta.x/2 - 18;
+        sweetSpotMaxPosition = backgroundRectTransform.sizeDelta.x / 2 - bitterSpotRectTransform.sizeDelta.x / 2 - 25;
 
         bitterSpotRectTransform.localPosition = sweetSpotRectTransform.localPosition;
 
 
         sweetSpotRange = new Vector2(
-            (sweetSpotRectTransform.localPosition.x - sweetSpotRectTransform.rect.width/2), 
+            (sweetSpotRectTransform.localPosition.x - sweetSpotRectTransform.rect.width / 2),
             (sweetSpotRectTransform.localPosition.x + sweetSpotRectTransform.rect.width / 2)
             );
 
         bitterSpotRange = new Vector2(
-            (bitterSpotRectTransform.localPosition.x - bitterSpotRectTransform.rect.width/2),
-            (bitterSpotRectTransform.localPosition.x + bitterSpotRectTransform.rect.width / 2 )
+            (bitterSpotRectTransform.localPosition.x - bitterSpotRectTransform.rect.width / 2),
+            (bitterSpotRectTransform.localPosition.x + bitterSpotRectTransform.rect.width / 2)
             );
-        
+
     }
 
     public PullResult CheckIfIndicatorIsInContactWithSweetSpot()

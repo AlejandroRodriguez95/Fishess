@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     List<Fish> availableFishes;
     [SerializeField]
-    GameObject pullSystem;    
+    GameObject pullSystem;
     [SerializeField]
     GameObject reelSystem;
 
     [SerializeField]
-    SpriteRenderer gameOverOverlay;    
+    SpriteRenderer gameOverOverlay;
     [SerializeField]
     SpriteRenderer gameOverText;
     [SerializeField]
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     CharacterAnimationController characterAnimation;
     [SerializeField]
-    PullController pullController;    
+    PullController pullController;
     [SerializeField]
     ReelController reelController;
     [SerializeField]
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
 
         currentFishMisses = 0;
         reelSpins = 0;
-        reelSpinsToCatch = Random.Range((int)currentFish.ReelSpinsToCatch.x,(int)currentFish.ReelSpinsToCatch.y);
+        reelSpinsToCatch = Random.Range((int)currentFish.ReelSpinsToCatch.x, (int)currentFish.ReelSpinsToCatch.y);
 
         ReelController.SpinCountUpdated += OnSpinCountUpdated;
 
@@ -138,7 +138,8 @@ public class GameManager : MonoBehaviour
                 if (fishCollection.Count == 0)
                     return;
 
-                if(Input.GetKeyDown(KeyCode.Space) && !TextScript.textIsBeingDisplayed)
+
+                if (Input.GetKeyDown(KeyCode.Space) && !TextScript.textIsBeingDisplayed)
                 {
                     audioManager.PlayAudio(audioClips[0], 0.15f);
 
@@ -146,7 +147,7 @@ public class GameManager : MonoBehaviour
                     currentStage = GameStages.CastingRod;
                 }
                 break;
-                
+
             //player isn't able to do anything until a fish is caught
             case GameStages.CastingRod:
                 characterAnimation.UpdateAnimation(currentStage);
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameStages.WaitingForFish:
-                if(!waitingCoroutineIsActive)
+                if (!waitingCoroutineIsActive)
                 {
                     float waitingTime = Random.Range(currentFish.FishBitesBaitTime.x, currentFish.FishBitesBaitTime.y);
                     StartCoroutine(WaitForSecondsAndMoveToStage(Random.Range(currentFish.FishBitesBaitTime.x, currentFish.FishBitesBaitTime.y), GameStages.FishBitRod));
@@ -199,16 +200,16 @@ public class GameManager : MonoBehaviour
                     {
                         case PullResult.Hit:
                             pullCount++;
-                            if(pullCount == 1)
+                            if (pullCount == 1)
                                 audioManager.PlayHitAndPull(audioClipsHitAndPull[1]);
                             if (pullCount == 2)
                                 audioManager.PlayHitAndPull(audioClipsHitAndPull[2]);
                             if (pullCount >= 3)
                                 audioManager.PlayHitAndPull(audioClipsHitAndPull[3]);
 
-                            if(pullCount == pullsToReelAgain)
+                            if (pullCount == pullsToReelAgain)
                             {
-                                waitingCoroutineIsActive = false;   
+                                waitingCoroutineIsActive = false;
                                 waitAndChangeStage = StartCoroutine(WaitForSecondsAndMoveToStage(0f, GameStages.Reel));
                             }
                             break;
@@ -244,11 +245,11 @@ public class GameManager : MonoBehaviour
                 if (!waitingCoroutineIsActive)
                 {
                     audioManager.StopAudio();
-                    if(reelController.Friction >=0 && reelController.Friction <= 1)
+                    if (reelController.Friction >= 0 && reelController.Friction <= 1)
                         audioManager.PlayAudioLoop(audioClips[3]);
-                    if(reelController.Friction >=1 && reelController.Friction <= 4)
+                    if (reelController.Friction >= 1 && reelController.Friction <= 4)
                         audioManager.PlayAudioLoop(audioClips[2]);
-                    if(reelController.Friction >= 4 && reelController.Friction <= 10)
+                    if (reelController.Friction >= 4 && reelController.Friction <= 10)
                         audioManager.PlayAudioLoop(audioClips[1]);
 
 
@@ -295,7 +296,7 @@ public class GameManager : MonoBehaviour
                     uiManager.UnlockFish(currentFish.FishId);
                     availableFishes.Remove(currentFish);
 
-                    if(availableFishes.Count == 0)
+                    if (availableFishes.Count == 0)
                     {
                         // finish game
                         var rt = capturedFish.GetComponent<RectTransform>();
@@ -305,10 +306,8 @@ public class GameManager : MonoBehaviour
                         break;
                     }
 
-                    TextScript.displayRadioText.Invoke(currentFish.FishId + 1);
-                    audioManager.PlayRadio(audioClips[random]);
-
                     fishesCaptured++;
+                    StartCoroutine(WaitAndDisplayText(7f, random));
 
                     ResetCurrentFish();
                     StartCoroutine(WaitForSecondsAndMoveToStage(8f, GameStages.Idle));
@@ -333,13 +332,20 @@ public class GameManager : MonoBehaviour
                 if (!waitingCoroutineIsActive)
                 {
                     waitingCoroutineIsActive = true;
-                    audioManager.StopAllAudio();
-                    uiManager.TurnOffCanvas();
 
                     StartCoroutine(GameOverFadeInBG());
                 }
                 break;
         }
+    }
+
+    IEnumerator WaitAndDisplayText(float waitTime, int random)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        TextScript.displayRadioText.Invoke(currentFish.FishId + 1);
+        audioManager.PlayRadio(audioClips[random]);
+
     }
 
     IEnumerator WaitForSecondsAndMoveToStage(float seconds, GameStages nextStage)
@@ -354,7 +360,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentFishMisses > currentFish.FishMaxFails)
             return true;
-        
+
         return false;
     }
 
@@ -391,6 +397,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverFadeInBG()
     {
+        yield return new WaitForSeconds(6f);
+        audioManager.StopAllAudio();
+        uiManager.TurnOffCanvas();
+
         gameOverOverlay.gameObject.SetActive(true);
         float elapsedTime = 0.0f;
         Color startColor = gameOverOverlay.color;
@@ -409,7 +419,7 @@ public class GameManager : MonoBehaviour
         audioManager.EndOfTheWorld();
         StartCoroutine(GameOverFadeInText());
     }
-        IEnumerator GameOverFadeInText()
+    IEnumerator GameOverFadeInText()
     {
         yield return new WaitForSeconds(5);
         gameOverText.gameObject.SetActive(true);
@@ -429,7 +439,7 @@ public class GameManager : MonoBehaviour
         gameOverText.color = targetColor;
 
         yield return new WaitForSeconds(2);
-        if(Input.anyKeyDown)
+        if (Input.anyKeyDown)
             Application.Quit();
     }
 
