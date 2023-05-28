@@ -21,8 +21,8 @@ MonoBehaviour:
   fishImage: {fileID: 21300000, guid: 54ffe2e642a718c41822db5d238df7f3, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 5
-  fishMaxFails: 3
+  fishMaxFails: 5
   pullIndicatorSpeedRange: {x: 350, y: 400}
-  reelSpinsToCatch: {x: 15, y: 20}
-  reelFrictionRange: {x: 3, y: 5}
+  reelSpinsToCatch: {x: 20, y: 20}
+  reelFrictionRange: {x: 0.3, y: 0.3}
   sweetSpotSizeRange: {x: 60, y: 80}

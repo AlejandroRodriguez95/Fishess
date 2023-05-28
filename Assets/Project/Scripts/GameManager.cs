@@ -380,7 +380,7 @@ public class GameManager : MonoBehaviour
             audioManager.PlayHitAndPull(audioClipsHitAndPull[5]);
         if (reelSpins == 3)
             audioManager.PlayHitAndPull(audioClipsHitAndPull[6]);
-        if (reelSpins >= 3)
+        if (reelSpins > 3)
             audioManager.PlayHitAndPull(audioClipsHitAndPull[7]);
 
 
