@@ -1136,6 +1136,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7946eced8af84384780d6d0e66b2661c, type: 3}
   - {fileID: 8300000, guid: 8d2082cd77c56af4fbc4273cb7436780, type: 3}
   - {fileID: 8300000, guid: b85e1b33df76a104b928419da1ef6a9e, type: 3}
+  - {fileID: 8300000, guid: bc2d3baac9737524ea9773a2161c46ed, type: 3}
   audioClipsHitAndPull:
   - {fileID: 8300000, guid: 7c38d508fc2857d4e8b7e398ee599b4a, type: 3}
   - {fileID: 8300000, guid: 5b931815e2d1f534fa350b2287a4f805, type: 3}
