@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     PullController pullController;    
     [SerializeField]
     ReelController reelController;
+    [SerializeField]
+    TextScript radioTextScript;
 
     //game loop variables: 
     [SerializeField]
@@ -83,7 +85,9 @@ public class GameManager : MonoBehaviour
         availableFishes = new List<Fish>(fishCollection);
         fishesCaptured = 0;
 
-        currentFish = availableFishes[0];
+        if (availableFishes.Count > 0)
+            currentFish = availableFishes[0];
+
         currentFishMisses = 0;
         reelSpins = 0;
         reelSpinsToCatch = Random.Range((int)currentFish.ReelSpinsToCatch.x,(int)currentFish.ReelSpinsToCatch.y);
@@ -93,6 +97,11 @@ public class GameManager : MonoBehaviour
         currentStage = GameStages.Idle;
     }
 
+    private void Start()
+    {
+        audioManager.PlayAudio(audioClips[7]);
+        TextScript.displayRadioText.Invoke(0);
+    }
     private void Update()
     {
         HandleStage();
@@ -115,9 +124,13 @@ public class GameManager : MonoBehaviour
                 reelSpinsToCatch = Random.Range((int)currentFish.ReelSpinsToCatch.x, (int)currentFish.ReelSpinsToCatch.y);
 
                 characterAnimation.UpdateAnimation(currentStage);
+                if (fishCollection.Count == 0)
+                    return;
+
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
                     audioManager.PlayAudio(audioClips[0], 0.15f);
+
                     pullController.SweetSpotMinAndMaxSize = new Vector2(currentFish.SweetSpotSizeRange.x, currentFish.SweetSpotSizeRange.y);
                     currentStage = GameStages.CastingRod;
                 }
@@ -254,6 +267,7 @@ public class GameManager : MonoBehaviour
                         random = 10;
                     }
 
+                    TextScript.displayRadioText.Invoke(currentFish.FishId + 1);
                     audioManager.PlayRadio(audioClips[random]);
 
                     capturedFish.sprite = currentFish.FishImage;
@@ -263,6 +277,16 @@ public class GameManager : MonoBehaviour
                     uiManager.UnlockFish(currentFish.FishId);
                     availableFishes.Remove(currentFish);
 
+                    if(fishCollection.Count == 0)
+                    {
+                        // finish game
+
+                        var rt = capturedFish.GetComponent<RectTransform>();
+                        rt.localScale = Vector3.one * 1.5f;
+                        rt.anchoredPosition += new Vector2(30f, 0);
+
+
+                    }
                     fishesCaptured++;
 
                     ResetCurrentFish();

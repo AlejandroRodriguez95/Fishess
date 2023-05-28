@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     AudioSource radioAudioSource;
 
-    private void Start()
+    private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
