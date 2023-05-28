@@ -346,7 +346,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        TextScript.displayRadioText.Invoke(currentFish.FishId + 1);
+        TextScript.displayRadioText.Invoke(currentFish.FishId);
         audioManager.PlayRadio(audioClips[random]);
 
     }
