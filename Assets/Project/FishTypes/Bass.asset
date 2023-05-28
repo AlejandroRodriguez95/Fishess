@@ -15,9 +15,8 @@ MonoBehaviour:
   fishName: Striped Bass
   fishId: 1
   fishDescription: Such beautiful stripes! Can't wait to take this back home.
-  fishLore: Striped Bass travel long distances to spawn in freshwater rivers and
-    streams, and then returning to the ocean. This unique behavior contributes to
-    their widespread distribution and popularity among anglers.
+  fishLore: Striped Bass travel long distances to spawn in freshwater before returning
+    back to the ocean. This unique behavior contributes to their widespread distribution.
   fishImage: {fileID: 21300000, guid: f4211508cbb628441ab974acd6211882, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 15

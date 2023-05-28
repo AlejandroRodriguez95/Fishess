@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.45745817, g: 0.5834107, b: 0.9433962, a: 0.7490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1239,25 +1239,28 @@ MonoBehaviour:
   - 'Years of hard work and dedication are paying off as these prized fish stage
     a triumphant comeback. '
   - Let's keep up the responsible fishing practices and ensure a thriving future
-    for these magnificent striped beauties
+    for these magnificent striped beauties.
   radioTextArray3:
-  - As we expand our perspective beyond the seas, let's delve into the global stage
-    where tensions are on the rise. Political disputes and economic complexities
-    dominate headlines.
+  - As we expand our perspective beyond the seas, let's dive into the global stage
+    where tensions are on the rise.
   - Staying informed about these developments is crucial as they shape our world.
-  - 'Stay tuned, as we bring you the latest updates on this ever-evolving international
-    scene. '
+  - ' Stay tuned, as we bring you the latest updates on this ever-evolving international
+    scene.'
   radioTextArray4:
   - 'Wait... what''s happening? We''re experiencing some technical difficulties here... '
   radioTextArray5:
   - 'We have received distressing news of the start of a nuclear war. Stay calm and
     seek immediate shelter in a sturdy building or underground location. '
+  - Stay informed through trusted sources, follow instructions from local authorities,
+    and keep supplies ready.
+  - ' Remember, we will provide updates as they become available. Stay safe, stay
+    informed, and take care'
   radioTextArray6:
   - 'Is this really the end...? '
   radioTextArray7:
   - '.......... '
   radioTextArray8: []
-  fadeDuration: 1
+  fadeDuration: 1.5
   displayDuration: 5
   panel: {fileID: 827728970}
 --- !u!114 &827728970
@@ -1432,12 +1435,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '-Press space to cast your rod
+  m_text: 'Press SPACE to cast your rod
 
-    -Hold click and spin the mouse to reel
+    HOLD the reel handle and SPIN
 
-    -Use
-    the space bar to hit the bar on the right spot when prompted'
+    Press
+    SPACE on the sliding bar to hit the right spot'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1470,15 +1473,15 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: 35
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
@@ -1635,7 +1638,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 11.8620615}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   fishDescription: Is this... a goldfish? How did it end up here... How is it thriving
     in seawater?
   fishLore: Goldfish are adaptable creatures, thriving in different water environments.
-    They can survive in freshwater and brackish water, making them versatile swimmers.
+    They can survive in freshwater and brackish water.
   fishImage: {fileID: 21300000, guid: 54ffe2e642a718c41822db5d238df7f3, type: 3}
   fishBitesBaitTime: {x: 3, y: 5}
   fishMaxHealth: 5
