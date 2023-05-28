@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     AudioSource ambientSoundAudioSource;    
     [SerializeField]
     AudioSource endOfTheWorldAudio;
+    [SerializeField]
+    AudioSource hitAndPullAudioSource;
 
     private void Awake()
     {
@@ -60,5 +62,12 @@ public class AudioManager : MonoBehaviour
     public void EndOfTheWorld()
     {
         endOfTheWorldAudio.Play();
+    }
+
+    public void PlayHitAndPull(AudioClip clip)
+    {
+        hitAndPullAudioSource.Stop();
+        hitAndPullAudioSource.clip = clip;
+        hitAndPullAudioSource.Play();
     }
 }

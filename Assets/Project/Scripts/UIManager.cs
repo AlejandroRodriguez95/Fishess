@@ -113,17 +113,20 @@ public class UIManager : MonoBehaviour
 
     IEnumerator DisplayJournal()
     {
-        ToggleOnButton.SetActive(false);
-        while(journal.anchoredPosition.x != journalDisplayPos.x)
+        if (elapsed == 0)
         {
-            yield return new WaitForEndOfFrame();
-            journal.anchoredPosition = Vector2.Lerp(journalHiddenPos, journalDisplayPos, elapsed);
-            fishInfo.anchoredPosition = Vector2.Lerp(fishInfoHiddenPos, fishInfoDisplayPos, elapsed);
-            elapsed += Time.deltaTime/duration;
+            ToggleOnButton.SetActive(false);
+            toggleOffButton.SetActive(true);
+            while(journal.anchoredPosition.x != journalDisplayPos.x)
+            {
+                yield return new WaitForEndOfFrame();
+                journal.anchoredPosition = Vector2.Lerp(journalHiddenPos, journalDisplayPos, elapsed);
+                fishInfo.anchoredPosition = Vector2.Lerp(fishInfoHiddenPos, fishInfoDisplayPos, elapsed);
+                elapsed += Time.deltaTime/duration;
 
+            }
+            elapsed = 0;
         }
-        toggleOffButton.SetActive(true);
-        elapsed = 0;
     }    
     public void ToggleJournalOff()
     {
@@ -132,16 +135,19 @@ public class UIManager : MonoBehaviour
 
     IEnumerator HideJournal()
     {
-        toggleOffButton.SetActive(false);
-        while(journal.anchoredPosition.x != journalHiddenPos.x)
+        if(elapsed == 0)
         {
-            yield return new WaitForEndOfFrame();
-            journal.anchoredPosition = Vector2.Lerp(journalDisplayPos, journalHiddenPos, elapsed);
-            fishInfo.anchoredPosition = Vector2.Lerp(fishInfoDisplayPos, fishInfoHiddenPos, elapsed);
-            elapsed += Time.deltaTime/duration;
+            toggleOffButton.SetActive(false);
+            ToggleOnButton.SetActive(true);
+            while(journal.anchoredPosition.x != journalHiddenPos.x)
+            {
+                yield return new WaitForEndOfFrame();
+                journal.anchoredPosition = Vector2.Lerp(journalDisplayPos, journalHiddenPos, elapsed);
+                fishInfo.anchoredPosition = Vector2.Lerp(fishInfoDisplayPos, fishInfoHiddenPos, elapsed);
+                elapsed += Time.deltaTime/duration;
+            }
+            elapsed = 0;
         }
-        ToggleOnButton.SetActive(true);
-        elapsed = 0;
     }
     #endregion
 

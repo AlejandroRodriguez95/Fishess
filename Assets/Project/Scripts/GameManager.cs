@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
     GameObject reelSystem;
 
     [SerializeField]
-    SpriteRenderer gameOverOverlay;
+    SpriteRenderer gameOverOverlay;    
+    [SerializeField]
+    SpriteRenderer gameOverText;
     [SerializeField]
     float gameOverFadeOutDuration;
 
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour
     [Header("Audio")]
     [SerializeField]
     List<AudioClip> audioClips;
+    [SerializeField]
+    List<AudioClip> audioClipsHitAndPull;
 
     // Audios indexes:
     // 0.   Swing rod
@@ -107,6 +111,7 @@ public class GameManager : MonoBehaviour
     {
         audioManager.PlayAudio(audioClips[7]);
         TextScript.displayRadioText.Invoke(0);
+        uiManager.ToggleOnButton.GetComponent<Button>().onClick.Invoke();
     }
     private void Update()
     {
@@ -194,6 +199,13 @@ public class GameManager : MonoBehaviour
                     {
                         case PullResult.Hit:
                             pullCount++;
+                            if(pullCount == 1)
+                                audioManager.PlayHitAndPull(audioClipsHitAndPull[1]);
+                            if (pullCount == 2)
+                                audioManager.PlayHitAndPull(audioClipsHitAndPull[2]);
+                            if (pullCount >= 3)
+                                audioManager.PlayHitAndPull(audioClipsHitAndPull[3]);
+
                             if(pullCount == pullsToReelAgain)
                             {
                                 waitingCoroutineIsActive = false;   
@@ -201,9 +213,11 @@ public class GameManager : MonoBehaviour
                             }
                             break;
                         case PullResult.Miss:
+                            audioManager.PlayAudio(audioClipsHitAndPull[0]);
                             currentFishMisses++;
                             break;
                         case PullResult.Bitter:
+                            audioManager.PlayAudio(audioClipsHitAndPull[0]);
                             currentFishMisses += 2;
                             break;
                     }
@@ -281,7 +295,7 @@ public class GameManager : MonoBehaviour
                     uiManager.UnlockFish(currentFish.FishId);
                     availableFishes.Remove(currentFish);
 
-                    if(availableFishes.Count == 6)
+                    if(availableFishes.Count == 0)
                     {
                         // finish game
                         var rt = capturedFish.GetComponent<RectTransform>();
@@ -322,7 +336,7 @@ public class GameManager : MonoBehaviour
                     audioManager.StopAllAudio();
                     uiManager.TurnOffCanvas();
 
-                    StartCoroutine(GameOverFadeOut());
+                    StartCoroutine(GameOverFadeInBG());
                 }
                 break;
         }
@@ -360,12 +374,22 @@ public class GameManager : MonoBehaviour
     void OnSpinCountUpdated()
     {
         reelSpins++;
+        if (reelSpins == 1)
+            audioManager.PlayHitAndPull(audioClipsHitAndPull[4]);
+        if (reelSpins == 2)
+            audioManager.PlayHitAndPull(audioClipsHitAndPull[5]);
+        if (reelSpins == 3)
+            audioManager.PlayHitAndPull(audioClipsHitAndPull[6]);
+        if (reelSpins >= 3)
+            audioManager.PlayHitAndPull(audioClipsHitAndPull[7]);
+
+
         if (reelSpins >= reelSpinsToCatch) // was fish captured?
             wasFishCaptured = true;
 
     }
 
-    IEnumerator GameOverFadeOut()
+    IEnumerator GameOverFadeInBG()
     {
         gameOverOverlay.gameObject.SetActive(true);
         float elapsedTime = 0.0f;
@@ -383,6 +407,30 @@ public class GameManager : MonoBehaviour
 
         gameOverOverlay.color = targetColor;
         audioManager.EndOfTheWorld();
+        StartCoroutine(GameOverFadeInText());
+    }
+        IEnumerator GameOverFadeInText()
+    {
+        yield return new WaitForSeconds(5);
+        gameOverText.gameObject.SetActive(true);
+        float elapsedTime = 0.0f;
+        Color startColor = gameOverText.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, 1f);
+
+        while (elapsedTime < gameOverFadeOutDuration)
+        {
+            float t = elapsedTime / gameOverFadeOutDuration;
+            gameOverText.color = Color.Lerp(startColor, targetColor, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        gameOverText.color = targetColor;
+
+        yield return new WaitForSeconds(2);
+        if(Input.anyKeyDown)
+            Application.Quit();
     }
 
 }
