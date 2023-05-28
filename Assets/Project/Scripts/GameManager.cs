@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     SpriteRenderer gameOverText;
     [SerializeField]
     float gameOverFadeOutDuration;
+    bool gameOver;
 
 
     [Header("Audio")]
@@ -335,6 +336,8 @@ public class GameManager : MonoBehaviour
 
                     StartCoroutine(GameOverFadeInBG());
                 }
+                if (Input.anyKeyDown && gameOver)
+                    Application.Quit();
                 break;
         }
     }
@@ -439,8 +442,7 @@ public class GameManager : MonoBehaviour
         gameOverText.color = targetColor;
 
         yield return new WaitForSeconds(2);
-        if (Input.anyKeyDown)
-            Application.Quit();
+        gameOver = true;
     }
 
 }
