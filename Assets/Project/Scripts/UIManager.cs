@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     GameObject fishJournalInUI;
+    [SerializeField]
+    GameObject canvas;
 
     [Header("Fish showcase")]
     [SerializeField]
@@ -169,6 +171,11 @@ public class UIManager : MonoBehaviour
             fishInfoDisplay.text = "";
         }
 
+    }
+
+    public void TurnOffCanvas()
+    {
+        canvas.SetActive(false);
     }
     #endregion
 }

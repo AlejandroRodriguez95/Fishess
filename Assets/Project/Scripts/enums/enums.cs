@@ -11,7 +11,8 @@ public enum GameStages
     Pull = 500,
     Reel = 600,
     FishCaught = 700,
-    FishRanAway = 800
+    FishRanAway = 800,
+    GameOver = 900,
 }
 
 public enum PullResult

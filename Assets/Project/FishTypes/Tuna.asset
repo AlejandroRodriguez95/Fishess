@@ -22,6 +22,6 @@ MonoBehaviour:
   fishMaxHealth: 1
   fishMaxFails: 15
   pullIndicatorSpeedRange: {x: 200, y: 250}
-  reelSpinsToCatch: {x: 10, y: 11}
-  reelFrictionRange: {x: 3, y: 10}
+  reelSpinsToCatch: {x: 1, y: 1}
+  reelFrictionRange: {x: 1, y: 3}
   sweetSpotSizeRange: {x: 60, y: 80}

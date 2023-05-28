@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject reelSystem;
 
+    [SerializeField]
+    SpriteRenderer gameOverOverlay;
+    [SerializeField]
+    float gameOverFadeOutDuration;
+
+
     [Header("Audio")]
     [SerializeField]
     List<AudioClip> audioClips;
@@ -127,7 +133,7 @@ public class GameManager : MonoBehaviour
                 if (fishCollection.Count == 0)
                     return;
 
-                if(Input.GetKeyDown(KeyCode.Space))
+                if(Input.GetKeyDown(KeyCode.Space) && !TextScript.textIsBeingDisplayed)
                 {
                     audioManager.PlayAudio(audioClips[0], 0.15f);
 
@@ -267,8 +273,6 @@ public class GameManager : MonoBehaviour
                         random = 10;
                     }
 
-                    TextScript.displayRadioText.Invoke(currentFish.FishId + 1);
-                    audioManager.PlayRadio(audioClips[random]);
 
                     capturedFish.sprite = currentFish.FishImage;
                     capturedFish.gameObject.SetActive(true);
@@ -277,16 +281,19 @@ public class GameManager : MonoBehaviour
                     uiManager.UnlockFish(currentFish.FishId);
                     availableFishes.Remove(currentFish);
 
-                    if(fishCollection.Count == 0)
+                    if(availableFishes.Count == 6)
                     {
                         // finish game
-
                         var rt = capturedFish.GetComponent<RectTransform>();
                         rt.localScale = Vector3.one * 1.5f;
                         rt.anchoredPosition += new Vector2(30f, 0);
-
-
+                        StartCoroutine(WaitForSecondsAndMoveToStage(3f, GameStages.GameOver));
+                        break;
                     }
+
+                    TextScript.displayRadioText.Invoke(currentFish.FishId + 1);
+                    audioManager.PlayRadio(audioClips[random]);
+
                     fishesCaptured++;
 
                     ResetCurrentFish();
@@ -304,6 +311,18 @@ public class GameManager : MonoBehaviour
                     characterAnimation.UpdateAnimation(currentStage);
                     ResetCurrentFish();
                     StartCoroutine(WaitForSecondsAndMoveToStage(5f, GameStages.Idle));
+                }
+                break;
+
+            case GameStages.GameOver:
+
+                if (!waitingCoroutineIsActive)
+                {
+                    waitingCoroutineIsActive = true;
+                    audioManager.StopAllAudio();
+                    uiManager.TurnOffCanvas();
+
+                    StartCoroutine(GameOverFadeOut());
                 }
                 break;
         }
@@ -344,6 +363,26 @@ public class GameManager : MonoBehaviour
         if (reelSpins >= reelSpinsToCatch) // was fish captured?
             wasFishCaptured = true;
 
+    }
+
+    IEnumerator GameOverFadeOut()
+    {
+        gameOverOverlay.gameObject.SetActive(true);
+        float elapsedTime = 0.0f;
+        Color startColor = gameOverOverlay.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, 1f);
+
+        while (elapsedTime < gameOverFadeOutDuration)
+        {
+            float t = elapsedTime / gameOverFadeOutDuration;
+            gameOverOverlay.color = Color.Lerp(startColor, targetColor, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        gameOverOverlay.color = targetColor;
+        audioManager.EndOfTheWorld();
     }
 
 }
