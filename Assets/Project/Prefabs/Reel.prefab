@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reelRotator: {fileID: 5496282600917398203}
   reel: {fileID: 5496282600443924484}
+  handle: {fileID: 0}
   rotationSpeed: 5
   friction: 0
 --- !u!1 &5496282600917398203
