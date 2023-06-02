@@ -3,6 +3,8 @@ Doomsday gamejam game
 
 Made this game in a week with https://github.com/daniawf for the Doomsday gamejam https://itch.io/jam/doomsday-game-jam
 
+Game can be played here: https://daniawf.itch.io/catch-and-decease
+
 Made on Unity 2022.1.23f1
 
 Credits:
